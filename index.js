@@ -15,7 +15,7 @@ function palindrome(str){
     //     console.log("not palindrom");
     // }
 // palindrome('madam');
-
+//convert Date to string
 function convertDateToString(date){
     const dateToString={days:'',months:'',years:''}
     if(date.days < 10){
@@ -31,7 +31,7 @@ function convertDateToString(date){
     dateToString.years=date.years.toString()
     return dateToString;
 }
-
+//date in all format
 function dateInAllFormat(date) {
     var dateStr=convertDateToString(date);
     var ddmmyyyy=dateStr.days + dateStr.months + dateStr.years;
@@ -44,7 +44,7 @@ function dateInAllFormat(date) {
 
     return [ddmmyyyy, mmddyyyy , yyyymmdd , ddmmyy ,mmddyy , yymmdd]
 }
-
+//check date in all format
  function checkPalindromForAllFormat(date) {
     const AllFormatPalindrom=dateInAllFormat(date);
     // var listPalindrom=[];
@@ -59,6 +59,7 @@ function dateInAllFormat(date) {
     }
     return flag;
 }
+//check for leap year
      function isLeapYear(years){
      if(years % 400 ===  0){
          return true
@@ -72,7 +73,7 @@ function dateInAllFormat(date) {
     return false
     }
               
-
+//get next date for next leap year
     function getNextDate(date) {
         days = date.days + 1;
         months=date.months;
@@ -105,7 +106,77 @@ function dateInAllFormat(date) {
         }
         return {days:days,months:months,years:years}
     }
+  //get previous date for previous leap year
+    function getPreviousDate(date){
+   days=date.days - 1;
+   months=date.months;
+   years=date.years;
+   const previousDateInAllFormat=[31,28,31,30,31,30,31,31,30,31,30,31]
+   if(days===0){
+    months--
+   
+     if(months===0){
+         months=12;
+        days=31;
+        years--;
+     }
+     else if(months==2) {
+         if(isLeapYear(years)){
+             days=29
+            }else{
+                days=28
+            }
+        }
+        else{
+            
+            days=previousDateInAllFormat[months-1]
+        }
+    }
+    
+   return {days:days,months:months, years:years};
+    }
 
+    
+// function nextpD(date) {
+//     var counter=0;
+//     var isPalindrome=getNextDate(date)
+//     while(1){
+//         counter++
+//         const result=checkPalindromForAllFormat(isPalindrome)
+//         if(result){
+//             break
+//         }
+//         isPalindrome=getNextDate(isPalindrome)
+//     }
+//     return [counter, isPalindrome]
+// }
+// console.log(nextpD({
+//     days:11,
+//     months:12,
+//     years:2021
+// }))
+
+//     function getPreviousPalindromeDate(date) {
+//         var ctr1=0;
+//         var getPrevious=getPreviousDate(date);
+//         while(1){
+//             ctr1++;
+//             var checkallprevious=checkPalindromForAllFormat(getPrevious);
+//       if(checkallprevious){
+//         break;
+//       }
+//       getPrevious=getPreviousDate(getPrevious);
+//         }
+//       return [ctr1,getPrevious]
+//     }
+//     var date1={
+//         days:2,
+//         months:10,
+//         years:2001
+//     }
+//   console.log(getPreviousPalindromeDate(date1));
+
+ //next palindrome date processing
     function getNextPalindrome(date) {
         var ctr=0;
         var nextDate=getNextDate(date);
@@ -130,25 +201,29 @@ function dateInAllFormat(date) {
  var inputDate=document.querySelector('.date-input')
  var result=document.querySelector('.result');
  var output=document.querySelector('.output')
- 
- function clickHandler() {
-    if(inputDate.value!==''){
+ output.style.display="none";
+
+ function clickHandler() {  //processing
+     output.style.display="inline-block";
+     if(inputDate.value==''){
+        output.innerText="Please Select A Date"
+     }
+     if(inputDate.value!==''){
         const inputDateSplit=inputDate.value.split('-');
-       var date ={
-        days:Number(inputDateSplit[2]),
-        months:Number(inputDateSplit[1]),
-        years:Number(inputDateSplit[0])
-    }
-    }
-
-    const checkpalindrome=checkPalindromForAllFormat(date);
-
+        var date ={
+         days:Number(inputDateSplit[2]),
+         months:Number(inputDateSplit[1]),
+         years:Number(inputDateSplit[0])
+     }
+     const checkpalindrome=checkPalindromForAllFormat(date);
    if(checkpalindrome==false){
     const nextPalindromeDate=getNextPalindrome(date)
     console.log(nextPalindromeDate);
-    output.innerText="your bithday is not palindrome" + "next palindrom date is" +nextPalindromeDate[0] + " " + nextPalindromeDate[1].days + "-" +nextPalindromeDate[1].months +"-" + nextPalindromeDate[1].years 
+    output.innerText="Your birthday is not palindrome" + " "+ "next palindrom date is far " +nextPalindromeDate[0] + " Days. " + " The next palindrome date is " + nextPalindromeDate[1].days + "-" +nextPalindromeDate[1].months +"-" + nextPalindromeDate[1].years 
    }else{
     output.innerText="Yayy!!!! Your birthday is palindrome"
 }
+     }
 } 
+
   result.addEventListener('click',clickHandler)

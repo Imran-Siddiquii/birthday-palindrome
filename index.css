@@ -1,0 +1,51 @@
+*{
+ margin:0px;
+ padding:0px;
+}
+
+ body{
+    background-color: lightblue;
+    font-family: 'Courier New', Courier, monospace;
+}
+ main{
+    width: 50vw;
+    height: fit-content;
+    background-color: rgb(185, 239, 247);
+    margin: 20px auto;
+    border-radius:5px ;
+    box-shadow: 2px 1px 5px 4px rgb(97, 171, 206) ;
+    text-align: center;
+    padding:16px;
+ }   
+main header{
+    font-size: 25px;
+    font-weight: 600;
+    margin: 25px auto;
+}
+ section ,label, input{
+    font-size: 20px;
+    margin-bottom: 20px;
+ }   
+ input{
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+ }
+ .result{
+    padding: 8px 12px;
+    background: white;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.output{
+    display: block;
+    background-color: white;
+    padding: 8px 12px;
+    background: white;
+    border: none;
+    font-size: 20px;
+    margin: 15px;
+    border-radius: 5px;
+}
